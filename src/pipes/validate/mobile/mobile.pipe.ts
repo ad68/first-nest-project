@@ -7,6 +7,9 @@ export class MobilePipe implements PipeTransform {
     if (mobile.length !== 11) {
       throw new BadRequestException("موبایل باید 11 رقم باشد")
     }
+    if (mobile.startsWith("0912")) value.operator = "همراه اول"
+    if (mobile.startsWith("0935")) value.operator = "ایرانسل"
+    if (mobile.startsWith("0922")) value.operator = "رایتل"
     return value;
   }
 }
