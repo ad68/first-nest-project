@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
 import { MobilePipe } from 'src/pipes/validate/mobile/mobile.pipe';
+import { CustomPipe } from 'src/pipes/custom/custom.pipe';
 @Controller('users')
 export class UsersController {
     constructor(private readonly userService: UsersService) { }
@@ -11,11 +12,11 @@ export class UsersController {
         return this.userService.getAll()
     }
     @Get("/:id")
-    get(@Param('id', ParseIntPipe) id: string) {
+    get(@Param('id', ParseIntPipe, CustomPipe) id: string) {
         return this.userService.getById(Number(id))
     }
     @Post()
-    store(@Body(new MobilePipe()) createUserDto: CreateUserDto) {
+    store(@Body(new MobilePipe(11)) createUserDto: CreateUserDto) {
         return this.userService.createUser(createUserDto);
     }
     @Put("/:id")
