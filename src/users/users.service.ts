@@ -10,19 +10,19 @@ export class UsersService {
         @InjectRepository(User)
         private userRepository: Repository<User>
     ) { }
-    private users: any = [{
-        id: 1,
-        name: "ali"
-    },
-    {
-        id: 2,
-        name: "mahdi"
-    },
-    {
-        id: 3,
-        name: "zahra"
-    }
-    ]
+    /*  private users: any = [{
+         id: 1,
+         name: "ali"
+     },
+     {
+         id: 2,
+         name: "mahdi"
+     },
+     {
+         id: 3,
+         name: "zahra"
+     }
+     ] */
     getAll(): Promise<Array<User>> {
         return this.userRepository.find()
         /* return {
@@ -35,10 +35,10 @@ export class UsersService {
         return this.userRepository.findOneBy({ id })
         /*return this.userRepository.findOneByOrFail({ id })
          */        /* return {
-              data: this.users.find((el: any) => el.id === id),
-              statusCode: 200,
-              message: "get user by Id"
-          } */
+         data: this.users.find((el: any) => el.id === id),
+         statusCode: 200,
+         message: "get user by Id"
+     } */
     }
     createUser(createUserDto: CreateUserDto): Promise<User> {
         const newUser = this.userRepository.create(createUserDto)
@@ -54,8 +54,8 @@ export class UsersService {
               message: "user created"
           }
       } */
-    updateUser(id: number, updateUserDto: UpdateUserDto): any {
-        this.userRepository.update(id, updateUserDto)
+    updateUser(id: number, updateUserDto: UpdateUserDto): Promise<object> {
+        return this.userRepository.update(id, updateUserDto)
         /*   let userIndex = this.users.findIndex(el => el.id == id)
           if (userIndex === -1) {
               return {
@@ -70,8 +70,10 @@ export class UsersService {
           }
           return this.users */
     }
-    deleteUser(id: number): any {
-        let userIndex = this.users.findIndex(el => el.id == id)
+    deleteUser(id: number): Promise<object> {
+        return this.userRepository.delete(id)
+
+        /* let userIndex = this.users.findIndex(el => el.id == id)
         if (userIndex === -1) {
             return {
                 data: null,
@@ -80,6 +82,6 @@ export class UsersService {
             }
         }
 
-        return this.users.filter(el => el.id != id)
+        return this.users.filter(el => el.id != id) */
     }
 }
