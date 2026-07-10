@@ -9,7 +9,9 @@ import { TypeOrmModule } from '@nestjs/typeorm'
       port: 3306,
       username: "root",
       password: "Ad68@2309412",
-      database: "user_manage"
+      database: "user_manage",
+      autoLoadEntities: true,
+      synchronize: true,
     }),
     UsersModule],
 })

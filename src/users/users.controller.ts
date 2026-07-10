@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
 import { MobilePipe } from 'src/pipes/validate/mobile/mobile.pipe';
 import { CustomPipe } from 'src/pipes/custom/custom.pipe';
+import { UpdateUserDto } from './dto/create-user.dto/update-user.dto';
 @Controller('users')
 export class UsersController {
     constructor(private readonly userService: UsersService) { }
@@ -20,7 +21,7 @@ export class UsersController {
         return this.userService.createUser(createUserDto);
     }
     @Put("/:id")
-    update(@Param('id') id: number, @Body() data: object) {
+    update(@Param('id') id: number, @Body() data: UpdateUserDto) {
         return this.userService.updateUser(id, data);
     }
     @Delete("/:id")
