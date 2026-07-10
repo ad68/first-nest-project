@@ -1,6 +1,16 @@
 import { Module } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm'
 @Module({
-  imports: [UsersModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: "mysql",
+      host: "localhost",
+      port: 3306,
+      username: "root",
+      password: "Ad68@2309412",
+      database: "user_manage"
+    }),
+    UsersModule],
 })
 export class AppModule { }
